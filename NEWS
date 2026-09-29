@@ -16,6 +16,7 @@ The following bugs are resolved with this release:
 
   [17142] locale: LANGUAGE environment variable processing and directory
     traversal
+  [27458] nptl: pthread_mutex_trylock ENOTRECOVERABLE
   [31026] network: Reachable assertion in resolv_conf.c:570:
     update_from_conf: Assertion `resolv_conf_matches (resp, conf)'
   [31877] libc: elf/tst-shstk-legacy-1g test failure on znver4
