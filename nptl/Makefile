@@ -325,6 +325,7 @@ tests = \
   tst-pthread_exit-nothreads-static \
   tst-pthread_gettid_np \
   tst-robust-fork \
+  tst-robust-trylock-notrecoverable \
   tst-robustpi1 \
   tst-robustpi2 \
   tst-robustpi3 \

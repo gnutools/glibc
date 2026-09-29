@@ -18,6 +18,7 @@ The following bugs are resolved with this release:
     coprocessor registers
   [17142] locale: LANGUAGE environment variable processing and directory
     traversal
+  [27458] nptl: pthread_mutex_trylock ENOTRECOVERABLE
   [28940] nss: __nss_database_get doesn't check for allocation failure
   [31026] network: Reachable assertion in resolv_conf.c:570:
     update_from_conf: Assertion `resolv_conf_matches (resp, conf)'
