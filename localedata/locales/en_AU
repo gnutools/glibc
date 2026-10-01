@@ -110,7 +110,7 @@ mon         "January";/
             "December"
 d_t_fmt     "%a %d %b %Y %T"
 date_fmt    "%a %d %b %Y %T %Z"
-d_fmt       "%d//%m//%y"
+d_fmt       "%d//%m//%Y"
 t_fmt       "%T"
 am_pm       "AM";"PM"
 t_fmt_ampm  "%I:%M:%S %p"
