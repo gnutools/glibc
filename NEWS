@@ -19,17 +19,34 @@ Deprecated and removed features, and other changes affecting compatibility:
 
 The following bugs were resolved with this release:
 
+  [12701] stdio: scanf accepts non-matching input
+  [17142] locale: LANGUAGE environment variable processing and directory
+    traversal
   [19341] ctype: Fallback initialization of TLS using relocations
+  [28940] nss: __nss_database_get doesn't check for allocation failure
   [29190] Fix handling of symbol versions which hash to zero
+  [30664] math: FAIL: math/test-double-fma
+  [31026] network: Reachable assertion in resolv_conf.c:570:
+    update_from_conf: Assertion `resolv_conf_matches (resp, conf)'
+    failed.
   [31943] _dl_find_object can fail if ld.so contains gaps between load segments
-  [32483] ctype macros segfault in multithreaded programs with multiple libc.so
   [32269] RISC-V IFUNC resolver cannot access gp pointer
+  [32483] ctype macros segfault in multithreaded programs with multiple libc.so
+  [32541] libc: getenv cannot be overridden in static builds
+  [32574] libc: pthread_attr_getstacksize/pthread_attr_getstack return
+    incorrect main stack size
   [32626] math: math: log10p1f is not correctly rounded
   [32627] math: math: sinhf is not correctly rounded
   [32630] math: math: tanf is not correctly rounded for all rounding
     modes
   [32653] dynamic-link: Review options for improving both security and
     backwards compatibility of glibc 2.41 dlopen / execstack handling
+  [32694] math: wrong clang version 3.4 prereq checks in bits/floatn.h
+    for __float128 support, should be 3.9
+  [32723] math: [2.41 Regression] /usr/include/bits/floatn.h doesn't
+    work with Intel SYCL compiler
+  [32763] dynamic-link: Static PIE with more than one PT_LOAD segments
+    at offset 0 segfault
   [32781] Linux: Remove attribute access from sched_getattr
   [32782] nptl: Race conditions in pthread cancellation causing crash
   [32786] nptl: PTHREAD_COND_INITIALIZER compatibility with pre-2.41 versions
@@ -41,15 +58,75 @@ The following bugs were resolved with this release:
     sparc64-linux-gnu
   [32987] elf: Fix subprocess status handling for tst-dlopen-sgid
   [32994] stdlib: resolve a double lock init issue after fork
+  [32996] dynamic-link: i386 TLS helper functions don't preserve XMM
+    registers
+  [33056] string: Power 10 strcmp clobbers nonvolatile vector registers
+    (CVE-2025-5702)
+  [33059] string: Power 10 memchr clobbers v20
+  [33060] string: Power 10 strncmp clobbers nonvolatile vector registers
+    (CVE-2025-5745)
+  [33091] string: Power 10 rawmemchr clobbers v20
+  [33112] libc: Hardened ldconfig crashes when running on Google Axion
+    (arm64)
+  [33129] dynamic-link: Need a version tag to indicate that glibc has
+    working GNU2 TLS support
   [33164] iconv -o should not create executable files
   [33185] Fix double-free after allocation failure in regcomp
+  [33212] dynamic-link: Add GLIBC_ABI_DT_X86_64_PLT version to indicate
+    x86_64 psABI compliance for DT_X86_64_PLT* support
+  [33221] dynamic-link: Add GLIBC_ABI_GNU_TLS version to indicate the
+    working GNU TLS run-time
+  [33224] dynamic-link: _dl_debug_state hook no longer works (since
+    8329939a37f483a16013dd8af8303cbcb86d92cb)
   [33234] Use TLS initial-exec model for __libc_tsd_CTYPE_* thread variables
   [33245] nptl: nptl: error in internal cancellation syscall handling
+  [33299] math: Bug in SVE powf predicate logic
   [33361] nss: Group merge does not react to ERANGE during merge
+  [33542] libc: x86: wmemset ifunc: stray '!' causing SSE2
   [33601] aarch64: Do not link conform tests with -Wl,-z,force-bti
+  [33642] math: Bug in SVE tanpi(f) predication
+  [33704] nptl: RFE: Relax failing pthread_mutex_trylock to load with
+    relaxed MO.
+  [33796] malloc: Integer overflow in _int_memalign leads to heap
+    corruption (CVE-2026-0861)
   [33814] glob: wordexp with WRDE_REUSE and WRDE_APPEND may return
     uninitialized memory
+  [33921] build: Building with Linux-7.0-rc1 errors on OPEN_TREE_CLONE
+  [33980] locale: iconv: ibm139x trigger assertion error when converting
+    to internal while lack enough room (CVE-2026-4046)
+  [33998] stdio: libio: ungetwc could be used to leak data on special
+    conditions (CVE-2026-5928)
+  [34008] stdio: stdio-common: scanf %mc pattern will cause heap
+    overflow when width > 1024
+  [34033] network: resolv/ns_print.c: ns_sprintrrf TSIG path bypasses
+    buflen and can overflow caller buffer
+  [34069] network: Buffer overread in ns_sprintrrf with corrupted RDATA
+    field (CVE-2026-6238)
+  [34090] libc: wordexp WRDE_APPEND rollback restores stale we_wordv,
+    leading to invalid free in wordfree
+  [34091] libc: wordepx: unbounded alloca (strndupa) in parse_tilde
+  [34236] locale: Non-representable transliteration still causes iconv
+    to exit with 1 if //TRANSLIT is specified
+  [34289] network: ns_sprintrrf uses p_class, p_type internally
+  [34360] dynamic-link: TOCTOU race condition in processing RPATH with
+    $ORIGIN DST for setuid/setgid binaries (CVE-2026-86805)
+  [34506] libc: Out-of-bounds stack array access in tdelete
+    (CVE-2026-19542)
+  [34510] locale: Buffer overflow in strfmon right-justification padding
+    (CVE-2026-19499)
   [34541] libc: Stack buffer overflow in _dl_reloc_overflow on POWER
+  [34556] locale: SHIFT_JISX0213 converter hang in shift_jisx0213.c
+    (CVE-2026-77117)
+  [34568] locale: EUC_JISX0213 converter hang in euc-jisx0213.c
+    (CVE-2026-80489)
+  [34574] stdio: Buffer overflow in fopen ,ccs= argument processing
+    (CVE-2026-18374)
+  [34618] time: zic mishandles fall 2026 Canada timestamps in glibc
+    2.40-2.43
+  [34624] nscd: nscd: unbound alloca use in aicache and hostcache
+    (CVE-2026-89092)
+  [34683] string: power8: one byte overread in strncasecmp
+    (CVE-2026-97399)
   [34752] libc: <sys/pidfd.h> not protected for C++
   [34774] locale: ISO-2022-CN-EXT iconv decoder: SO byte without a
     designation advances the input pointer out of bounds
@@ -65,6 +142,8 @@ The following bugs were resolved with this release:
     other vector lanes
   [34989] stdio: Wide scanf %s and %[ write an extra null byte past the
     destination (CVE-2026-115819)
+  [34991] regex: regex: double free after partial realloc failure
+    (CVE-2026-100290)
   [34993] glob: double free in prefix_array after a memory allocation
     failure (CVE-2026-126765)
 
